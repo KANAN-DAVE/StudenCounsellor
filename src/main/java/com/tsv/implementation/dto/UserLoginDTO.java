@@ -6,8 +6,6 @@ public class UserLoginDTO {		//We take in username password
 private String username;
 	
 	private String password;
-	
-	private int otp;
 
 	
 	public String getUsername() {
@@ -29,14 +27,6 @@ private String username;
 		this.password = password;
 	}
 
-	public int getOtp()
-	{
-		return otp;
-	}
 
-	public void setOtp(int otp)
-	{
-		this.otp = otp;
-	}
 
 }

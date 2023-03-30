@@ -19,48 +19,30 @@ import com.tsv.implementation.service.DefaultUserService;
 
 
 @Controller
+
 @RequestMapping("/login")
 public class LoginController {
 	@Autowired
 	private DefaultUserService userService;
-	
+
 	@Autowired
 	UserRepository userRepo;
-    
+
     @ModelAttribute("user")
     public UserLoginDTO userLoginDTO() {
         return new UserLoginDTO();
     }
-    
+
 	@GetMapping	//Redirect to login
 	public String login()
 	{
 		return "login";
 	}
-	
+
 	@PostMapping		//after submit will input will have mail and password
-	public String loginUser(@ModelAttribute("user") UserLoginDTO userLoginDTO)
-	{
-		System.out.println("UserDTO"+userLoginDTO);
-		 userService.loadUserByUsername(userLoginDTO.getUsername());
+	public String loginUser(@ModelAttribute("user") UserLoginDTO userLoginDTO) {
+		System.out.println("UserDTO" + userLoginDTO);
+		userService.loadUserByUsername(userLoginDTO.getUsername());
 		return "redirect:/dashboard";
-		//Searches the mail from the repository
-	}	//Defined in DefaultUserImpl
-
-//	@GetMapping("/otpVerification")	//We will be redirected to otp screen
-//	public String otpSent(Model model,UserLoginDTO userLoginDTO) {
-//		model.addAttribute("otpValue", userLoginDTO);
-//		return "otpScreen";
-//	}
-//	@PostMapping("/otpVerification")
-//	public String otpVerification(@ModelAttribute("otpValue") UserLoginDTO userLoginDTO) {
-//		SecurityContext securityContext = SecurityContextHolder.getContext();
-//		UserDetails user = (UserDetails) securityContext.getAuthentication().getPrincipal();
-//		User users = userRepo.findByEmail(user.getUsername());
-//		if(users.getOtp() == userLoginDTO.getOtp())	//Verifying the otp
-//					//Returning to the dashboard
-//		else
-//			return "redirect:/login/otpVerification?error";
-//	}
-
+	}
 }

@@ -36,8 +36,6 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler{
 		 UserDetails userDetails = (UserDetails) authentication.getPrincipal();
          String username = userDetails.getUsername();
          User user = userRepo.findByEmail(username);
-         String output = userService.generateOtp(user);
-         if(output=="success") 
         	 redirectUrl="/dashboard";	//redirects for otp verification
          
 		new DefaultRedirectStrategy().sendRedirect(request, response, redirectUrl);
